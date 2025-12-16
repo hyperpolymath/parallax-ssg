@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+name: Chapel CI
+
+permissions: read-all
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Install Chapel
+        run: |
+          # Install Chapel from official release
+          wget -q https://github.com/chapel-lang/chapel/releases/download/1.33.0/chapel-1.33.0-linux64-x86_64.tar.gz
+          tar xzf chapel-1.33.0-linux64-x86_64.tar.gz
+          echo "$PWD/chapel-1.33.0/bin/linux64-x86_64" >> $GITHUB_PATH
+
+      - name: Build
+        run: |
+          if [ -f src/parallax-ssg.chpl ]; then
+            chpl src/parallax-ssg.chpl -o parallax-ssg
+          fi
+
+  language-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Verify Chapel-only in src/
+        run: |
+          echo "Checking for forbidden languages in src/..."
+          forbidden=$(find src/ -type f \( -name "*.py" -o -name "*.js" -o -name "*.ts" -o -name "*.cpp" \) 2>/dev/null || true)
+          if [ -n "$forbidden" ]; then
+            echo "ERROR: Found forbidden language files in src/:"
+            echo "$forbidden"
+            exit 1
+          fi
+          echo "OK: Only Chapel files in src/"
