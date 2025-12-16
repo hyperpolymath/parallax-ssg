@@ -1,1 +1,68 @@
+= parallax-ssg
+:toc: auto
+:toclevels: 3
 
+**The definitive Chapel static site generator.**
+
+== Overview
+
+parallax-ssg is a parallel-first static site generator written in Chapel.
+It leverages Chapel's built-in parallelism for high-performance site builds
+across multiple cores or even distributed systems.
+
+== Language Enforcement
+
+[IMPORTANT]
+====
+This SSG **MUST** be written in Chapel. No exceptions.
+
+Forbidden languages for SSG logic:
+
+* Python
+* JavaScript/TypeScript
+* C++/OpenMP
+* Any language other than Chapel
+
+The **ONLY** non-Chapel code allowed is the ReScript MCP adapter in `adapters/`.
+====
+
+== Features
+
+* First-class parallel iterators for content processing
+* Automatic parallelization of page generation
+* Distributed computing support for massive sites
+* Clean, productive syntax
+* Excellent performance scaling
+
+== Requirements
+
+* Chapel 1.30+
+
+== Building
+
+[source,bash]
+----
+chpl src/parallax-ssg.chpl -o parallax-ssg
+./parallax-ssg --build
+----
+
+== Project Structure
+
+[source]
+----
+parallax-ssg/
+├── src/                  # Chapel source (THE SSG)
+├── adapters/             # ReScript MCP adapter only
+├── STATE.scm             # Project state
+├── ECOSYSTEM.scm         # Ecosystem position
+├── META.scm              # Architecture decisions
+└── .claude/CLAUDE.md     # AI guidelines
+----
+
+== Part of poly-ssg
+
+parallax-ssg is a satellite of the https://github.com/hyperpolymath/poly-ssg-mcp[poly-ssg-mcp] hub.
+
+== License
+
+AGPL-3.0-or-later
