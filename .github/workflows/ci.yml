@@ -25,8 +25,8 @@ jobs:
 
       - name: Build
         run: |
-          if [ -f src/parallax-ssg.chpl ]; then
-            chpl src/parallax-ssg.chpl -o parallax-ssg
+          if [ -f src/parallel-press.chpl ]; then
+            chpl src/parallel-press.chpl -o parallax-ssg
           fi
 
   language-check:
