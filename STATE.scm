@@ -3,8 +3,8 @@
 ;; SPDX-FileCopyrightText: 2025 Jonathan D.A. Jewell
 
 (define metadata
-  '((version . "1.0.0")
-    (updated . "2025-12-16")
+  '((version . "1.0.1")
+    (updated . "2025-12-17")
     (project . "parallax-ssg")
     (required-language . "Chapel")))
 
@@ -17,21 +17,25 @@
     (enforcement . "strict")))
 
 (define current-position
-  '((phase . "v1.0 - Chapel Implementation Complete")
-    (overall-completion . 100)
+  '((phase . "v1.0.1 - Core Complete, Integration Ready")
+    (overall-completion . 95)
     (components ((Chapel-engine ((status . "complete") (completion . 100)))
-                 (mcp-adapter ((status . "pending") (language . "ReScript") (completion . 0)))))))
+                 (mcp-adapter ((status . "implemented") (language . "ReScript") (completion . 85)
+                               (note . "Implemented but needs integration testing with poly-ssg-mcp hub")))))))
 
 (define blockers-and-issues
   '((critical ())
     (high-priority ())))
 
 (define critical-next-actions
-  '((immediate (("Connect MCP adapter in ReScript" . high)))))
+  '((immediate (("Integration test MCP adapter with poly-ssg-mcp hub" . high)
+                ("Add comprehensive Chapel test suite" . medium)
+                ("Document API for hub integration" . medium)))))
 
 (define state-summary
   '((project . "parallax-ssg")
     (language . "Chapel")
-    (completion . 100)
+    (completion . 95)
     (blockers . 0)
-    (updated . "2025-12-16")))
+    (next-milestone . "Hub integration testing")
+    (updated . "2025-12-17")))

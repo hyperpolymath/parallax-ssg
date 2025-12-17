@@ -119,7 +119,7 @@ module Adapter = {
             }
           | None => "."
           }
-          let result = runCommand("chpl src/parallax-ssg.chpl -o parallax-ssg", ~cwd=Some(path))
+          let result = runCommand("chpl src/parallel-press.chpl -o parallax-ssg", ~cwd=Some(path))
           resolve(result)
         })
       },
