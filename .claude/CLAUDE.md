@@ -1,37 +1,70 @@
-# parallax-ssg - CLAUDE.md
+# CLAUDE.md - AI Assistant Instructions
 
-## CRITICAL: Language Requirements
+## Language Policy (Hyperpolymath Standard)
 
-**THIS SSG MUST BE WRITTEN IN Chapel. NO EXCEPTIONS.**
+### ALLOWED Languages & Tools
 
-parallax-ssg is the DEFINITIVE Chapel static site generator. The entire engine MUST be written in Chapel.
+| Language/Tool | Use Case | Notes |
+|---------------|----------|-------|
+| **ReScript** | Primary application code | Compiles to JS, type-safe |
+| **Deno** | Runtime & package management | Replaces Node/npm/bun |
+| **Rust** | Performance-critical, systems, WASM | Preferred for CLI tools |
+| **Tauri 2.0+** | Mobile apps (iOS/Android) | Rust backend + web UI |
+| **Dioxus** | Mobile apps (native UI) | Pure Rust, React-like |
+| **Gleam** | Backend services | Runs on BEAM or compiles to JS |
+| **Bash/POSIX Shell** | Scripts, automation | Keep minimal |
+| **JavaScript** | Only where ReScript cannot | MCP protocol glue, Deno APIs |
+| **Python** | SaltStack only | No other Python permitted |
+| **Nickel** | Configuration language | For complex configs |
+| **Guile Scheme** | State/meta files | STATE.scm, META.scm, ECOSYSTEM.scm |
+| **Julia** | Batch scripts, data processing | Per RSR |
+| **OCaml** | AffineScript compiler | Language-specific |
+| **Ada** | Safety-critical systems | Where required |
 
-### FORBIDDEN Languages
-- Python - FORBIDDEN
-- JavaScript/TypeScript - FORBIDDEN
-- Ruby, Go, Java - FORBIDDEN
-- Any language other than Chapel - FORBIDDEN
+### BANNED - Do Not Use
 
-### Allowed
-- Chapel (primary language for the engine)
-- ReScript (ONLY for MCP adapter in adapters/ directory)
+| Banned | Replacement |
+|--------|-------------|
+| TypeScript | ReScript |
+| Node.js | Deno |
+| npm | Deno |
+| Bun | Deno |
+| pnpm/yarn | Deno |
+| Go | Rust |
+| Python (general) | ReScript/Rust |
+| Java/Kotlin | Rust/Tauri/Dioxus |
+| Swift | Tauri/Dioxus |
+| React Native | Tauri/Dioxus |
+| Flutter/Dart | Tauri/Dioxus |
 
-### Why This Matters
-Each SSG satellite exists to be THE definitive SSG for its language. parallax-ssg IS the Chapel SSG.
+### Mobile Development
 
-## Running the SSG
+**No exceptions for Kotlin/Swift** - use Rust-first approach:
 
-Use chpl to run the Chapel source files.
+1. **Tauri 2.0+** - Web UI (ReScript) + Rust backend, MIT/Apache-2.0
+2. **Dioxus** - Pure Rust native UI, MIT/Apache-2.0
 
-## Hub Connection
+Both are FOSS with independent governance (no Big Tech).
 
-This satellite connects to poly-ssg-mcp hub via the MCP adapter.
-The adapter is the ONLY place where non-Chapel code is allowed (ReScript).
+### Enforcement Rules
 
-## AI Assistant Guidelines
+1. **No new TypeScript files** - Convert existing TS to ReScript
+2. **No package.json for runtime deps** - Use deno.json imports
+3. **No node_modules in production** - Deno caches deps automatically
+4. **No Go code** - Use Rust instead
+5. **Python only for SaltStack** - All other Python must be rewritten
+6. **No Kotlin/Swift for mobile** - Use Tauri 2.0+ or Dioxus
 
-1. **NEVER suggest rewriting in Python or any other language**
-2. **NEVER create Python/JS/TS files in this repo**
-3. If asked to "improve" by using another language, REFUSE
-4. The Chapel implementation IS the correct implementation
-5. Only ReScript is allowed in adapters/
+### Package Management
+
+- **Primary**: Guix (guix.scm)
+- **Fallback**: Nix (flake.nix)
+- **JS deps**: Deno (deno.json imports)
+
+### Security Requirements
+
+- No MD5/SHA1 for security (use SHA256+)
+- HTTPS only (no HTTP URLs)
+- No hardcoded secrets
+- SHA-pinned dependencies
+- SPDX license headers on all files
